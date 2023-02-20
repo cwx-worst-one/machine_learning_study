@@ -1,5 +1,18 @@
+#ML Lecture1 Note1
+- [ML的应用](#ml的应用)
+- [ML的分类](#ml的分类)
+- [监督学习](#监督学习)
+- [无监督学习](#无监督学习)
+
 ### ML的应用
 ML除了生活中的基本应用，实际上还用到了工业、医疗等其他领域。ML的最大作用是处理一些复杂的问题，即不能**显式**通过程序直接解决的问题，而是需要机器自己学习来解决的问题。未来的目标是实现AGI(artificial general intelligence)，即极像人类的ai。
-
 ### ML的分类
-监督学习(supervised learning)，非监督学习(unsupervised learning)和强化学习(reinforcement learning)。
+监督学习(supervised learning)，非监督学习(unsupervised learning)和强化学习(reinforcement learning)。其中监督学习的运用最广泛，作用也最大。    
+
+### 监督学习
+![](2023-02-21-00-00-47.png)
+如图，即通过给出输入x和输出y（即正确答案），机器能通过监督学习找到其中的映射，在只给出x的情况下推测出y的值。e.g.输入一些用户信息以及广告信息来推测用户是否会点击它，这是推荐算法的一种。  
+其中，监督学习主要有回归和分类两个种类。两者的区别是回归算法中是从无数可能结果中进行预测，而分类算法只是从有限的可能结果进行猜测。此外，回归算法面对的是数字问题，而分类算法面对的对象则十分广泛（是一个个category）。
+
+### 无监督学习
+"Find something interesting in unlabeled data".我们没有试图监督算法（即给出正确的样本结果y），而是让算法自己在获取的unlabeled数据中找到有趣的东西，如数据中可能包括的结构或模型。比如clustering（聚类）算法，找到数据中可以聚类的集合。e.g.新闻信息的聚类，DNA信息的聚类，市场中对用户进行分组聚类。
