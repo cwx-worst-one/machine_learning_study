@@ -1,17 +1,18 @@
-# ML Lecture1 Note1
+## ML Lecture1 Note1
 - [ML Lecture1 Note1](#ml-lecture1-note1)
-    - [ML的应用](#ml的应用)
-    - [ML的分类](#ml的分类)
-    - [监督学习](#监督学习)
-    - [无监督学习](#无监督学习)
-    - [相关术语（terminology）🧐](#相关术语terminology)
-    - [线性回归模型](#线性回归模型)
-    - [代价函数（cost function）](#代价函数cost-function)
-    - [代价函数的可视化](#代价函数的可视化)
-    - [梯度下降](#梯度下降)
+  - [ML的应用](#ml的应用)
+  - [ML的分类](#ml的分类)
+  - [监督学习](#监督学习)
+  - [无监督学习](#无监督学习)
+  - [相关术语（terminology）🧐](#相关术语terminology)
+  - [线性回归模型](#线性回归模型)
+  - [代价函数（cost function）](#代价函数cost-function)
+  - [代价函数的可视化](#代价函数的可视化)
+  - [梯度下降（gradient descent）](#梯度下降gradient-descent)
 
 ### ML的应用
 ML除了生活中的基本应用，实际上还用到了工业、医疗等其他领域。ML的最大作用是处理一些复杂的问题，即不能**显式**通过程序直接解决的问题，而是需要机器自己学习来解决的问题。未来的目标是实现AGI(artificial general intelligence)，即极像人类的ai。
+
 ### ML的分类
 监督学习(supervised learning)，非监督学习(unsupervised learning)和强化学习(reinforcement learning)。其中监督学习的运用最广泛，作用也最大。    
 
@@ -45,7 +46,7 @@ $$J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f(x^i) - y^i) ^2  $$
 其中系数2是方便后续的计算。这是最常见的代价函数，也十分有用。我们的目标即是${minimize}_{w,b}J(w,b)$来得到好的模型。不同的w和b参数确定了不同的线性回归模型，而不同的模型又在训练集给定时确定了损失函数的值。
 
 <details>
-<summary><b>感觉</b></summary>
+<summary><b>idea</b></summary>
 <p> 其实训练集不变时，参数直接决定了损失函数值，这样看下来感觉就是求一个二元二次函数的极小值问题...</p>
 </details>
 
@@ -58,6 +59,14 @@ $$J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f(x^i) - y^i) ^2  $$
 ![](2023-02-21-20-57-04.png)  
 在同一等高线上的点虽然构造的模型/参数存在差别，但是它们的损失函数值相同，从这点上看模型效果相同。
 
-### 梯度下降
+### 梯度下降（gradient descent）
+经典算法，用于找到代价函数值最小时的参数。通过给定参数初值（通常取零向量）并不断调整它们使得代价函数值减小到一个极小值（**不一定是最小值**，只是local minima）。在**参数初值不同时得到最终的损失函数极小值可能不同**。而GD算法的经典式即为对每个参数变量用梯度进行更新：
+$$ w_{i+1} = w_i - \alpha \frac{\partial j(w,b)}{\partial w}$$
+其中参数可以扩展到多维，其中α是**学习率**（learning rate），取0~1之间的数，用于控制step的幅度大小，偏导值控制step的方向。
 
+- 注意：参数是**同时**（simultaneous）赋值更新的，即参数向量 $\vec{x}_i$ 更新到 $\vec{x}_{i+1}$
 
+<details>
+<summary><b>idea</b></summary>
+<p> 模型的参数就是损失函数的变量，使用GD算法得到的就是局部凸函数的极小值，也就是损失函数的可能最小值。</p>
+</details>
