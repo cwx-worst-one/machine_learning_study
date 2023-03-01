@@ -6,7 +6,8 @@
   - [梯度下降的收敛判断](#梯度下降的收敛判断)
   - [lr的设置](#lr的设置)
   - [特征工程 （Feature Engineering）](#特征工程-feature-engineering)
-  - [多项式回归](#多项式回归)
+  - [多项式回归 （polynomial regression）](#多项式回归-polynomial-regression)
+  - [scikit-learn library \&\& GD](#scikit-learn-library--gd)
 
 
 ### 多维特征
@@ -58,12 +59,39 @@ Andrew给出了两种判断梯度下降收敛的方法：一是直接观察学�
 导致这两种学习曲线非平滑递减的原因是 lr 设置过大或者程序出现bug。而Andrew实际上给出的设置 lr 的方法就是我们经常自己做的试测法，即不断尝试不同的lr值，观测学习曲线来调整知道找到一个平衡效率和正确性的 lr 值。
 
 ### 特征工程 （Feature Engineering）
+实际上即使用直觉并通过变换或合并原来的特征的方式去设计新的特征。在视频中的例子就是在长和宽的参数基础上加入面积特征参数。这样做完善了模型，同时有助于更好地预测结果。
+
+### 多项式回归 （polynomial regression）
+是对线性拟合的一种拓展，即拓展到了多项式函数（实际上应该可以拓展到各种函数），可以对参数用多项式来构造模型，即根式，n次幂等等。这相比于普通的线性模型更具有完备性。要注意的是无论使用什么函数进行拟合，在已知函数去构建模型的前提下，使用BGD算法的过程是一毛一样的，即只需要一开始将数据预处理：
+$$ \vec{x} = g(\vec{x}) ， 即$$
+$$ \vec{x}_i = g_i(\vec{x}_i)$$
+最后都回归到一个多元线性回归问题上去了~~
 
 
+### scikit-learn library && GD
+- scaler函数用于进行特征缩放
+``` python
+scaler = StandardScaler()
+X_norm = scaler.fit_transform(X_train)
+```
 
-### 多项式回归
+- SGDRegressor函数用于构建回归模型（当然还有LinearRegression等模型）
+```python
+sgdr = SGDRegressor(max_iter=1000)
+sgdr.fit(X_norm, y_train)
+```
 
+- 查看参数 w(coefficients 系数) 和 b(intercept 截距)
+```python
+b_norm = sgdr.intercept_
+w_norm = sgdr.coef_
+```
 
-
-
+- 进行预测
+```python
+# make a prediction using sgdr.predict()
+y_pred_sgd = sgdr.predict(X_norm)
+# make a prediction using w,b. 
+y_pred = np.dot(X_norm, w_norm) + b_norm  
+```
 
