@@ -8,6 +8,8 @@
   - [特征工程 （Feature Engineering）](#特征工程-feature-engineering)
   - [多项式回归 （polynomial regression）](#多项式回归-polynomial-regression)
   - [scikit-learn library \&\& GD](#scikit-learn-library--gd)
+  - [SUMMARY](#summary)
+- [完结撒花 🎉🎉🎉](#完结撒花-)
 
 
 ### 多维特征
@@ -75,7 +77,7 @@ scaler = StandardScaler()
 X_norm = scaler.fit_transform(X_train)
 ```
 
-- SGDRegressor函数用于构建回归模型（当然还有LinearRegression等模型）
+- SGDRegressor函数用于构建回归模型（**当然还有LinearRegression等模型**）
 ```python
 sgdr = SGDRegressor(max_iter=1000)
 sgdr.fit(X_norm, y_train)
@@ -94,4 +96,15 @@ y_pred_sgd = sgdr.predict(X_norm)
 # make a prediction using w,b. 
 y_pred = np.dot(X_norm, w_norm) + b_norm  
 ```
+### SUMMARY
+最后对一般线性回归问题进行方法总结：  
+1. 首先构建 or 获取数据集 （在 skill 中给出构造数据集的方法）
+2. 分割数据集 —— 取做训练集和测试集（可使用 feature scaling 方式进行预处理）
+3. 设置训练参数 —— lr epoch次数 batch_size
+4. 构建模型 并选择 GD 算法进行反向传播（线性回归模型的核心）  
+5. 在epoch中打印日志，如回报 loss 值等（可选）
+6. 得到参数 使用测试集进行测试
+7. 对模型进行评估 使用 MSE R方法等进行损失值的评测
+8. 对模型进行可视化 
 
+## 完结撒花 🎉🎉🎉
